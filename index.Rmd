@@ -1,0 +1,144 @@
+---
+title: "Estadísticas policiales"
+author: "Emily Díaz"
+date: '2022-06-13'
+output: 
+  html_document:
+  code_folding: hide
+  theme: readable
+  toc: true
+  toc_depth: 5
+  toc_float:
+    collapsed: FALSE
+    smooth_scroll: FALSE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Preparativos
+
+```{r carga-paquetes, message=FALSE}
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(leaflet)
+library(DT)
+library(forcats)
+```
+
+## Carga de datos
+
+```{r datos-generales, message=FALSE}
+estadisticas_policiales <-
+readxl::read_excel("C:/Users/Universidad/segunda-tarea/segunda-tarea/estadisticaspoliciales2021.xls")
+```
+
+## Transformaciones
+
+```{r cambio-fecha}
+estadisticas_policiales$Fecha <- as.Date(estadisticas_policiales$Fecha, format = "%d/%m/%Y")
+
+```
+
+## Tabla
+
+```{r tabla-dt, echo= FALSE, message=FALSE}
+estadisticas_policiales %>%
+  dplyr::select(Delito,
+                Fecha,
+                Victima,
+                Edad,
+                Genero,
+                Provincia,
+                Canton) %>%
+  datatable(
+    colnames = c(
+      "Delito",
+      "Fecha",
+      "Víctima",
+      "Edad",
+      "Género",
+      "Provincia",
+      "Cantón"
+    ),
+    options = list(
+      pageLength = 10,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  )
+```
+
+
+## Gráfico 1: Delitos por tipo de delito
+
+```{r grafico-tipo-delito, echo= FALSE, message=FALSE}
+grafico_delitos <-
+  estadisticas_policiales %>%
+  count(Delito) %>%
+  ggplot(aes(x = reorder(Delito, n), y = n)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Cantidad de delitos por tipo de delito") +
+  xlab("Tipo de delito") +
+  ylab("Cantidad") +
+  coord_flip()
+  theme_minimal()
+
+ggplotly(grafico_delitos)
+```
+
+## Gráfico 2: Delitos por mes en el año
+
+
+
+
+
+
+## Gráfico 3: Tipo de delito por género
+
+```{r grafico-delito-genero, echo= FALSE, message=FALSE}
+grafico_genero <-
+  estadisticas_policiales %>%
+  ggplot(aes(x = Delito, fill = Genero)) +
+  geom_bar(position = "fill") +
+  ggtitle("Tipo de delito por género") +
+  xlab("Delito") +
+  ylab("Proporción") +
+  labs(fill = "Delito") +
+  coord_flip() +
+  theme_minimal()
+
+ggplotly(grafico_genero) %>% config(locale = 'es')
+```
+
+## Gráfico 4: Cantidad de delitos para los cantones de San José, Alajuela, Cartago y Heredia
+
+```{r grafico-delito-cantones, echo=FALSE, message=FALSE}
+grafico_delito_cantones <-
+  estadisticas_policiales %>%
+  count(Canton) %>%
+  filter(Canton == "SAN JOSE" |
+           Canton == "ALAJUELA" |
+           Canton == "CARTAGO" | Canton == "HEREDIA") %>%
+  ggplot(aes(x = reorder(Canton, n), y = n)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Cantidad de Delitos en los Cantones de San José, Alajuela, Cartago y Heredia") +
+  xlab("Cantón") +
+  ylab("Cantidad") +
+  coord_flip() +
+  theme_minimal()
+
+ggplotly(grafico_delito_cantones)
+
+```
+
+
+
+
+
+
+
+
+
