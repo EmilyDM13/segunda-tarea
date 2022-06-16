@@ -91,10 +91,27 @@ ggplotly(grafico_delitos)
 
 ## Gráfico 2: Delitos por mes en el año
 
+```{r nueva-columna-mes, echo= FALSE, message=FALSE}
+d <-
+estadisticas_policiales %>%
+mutate(fecha_mes = lubridate::month(Fecha))
 
+o <-c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Ocutubre", "Noviembre")
+```
 
+```{r grafico-delitos-mes, echo= FALSE, message=FALSE}
+grafico_delitos_mes <-
+  d %>%
+  count(fecha_mes) %>%
+  ggplot(level =level_order,(aes(x = reorder(o, fecha_mes), y = n)))  +
+  geom_bar(stat = "identity") +
+  ggtitle("Delitos durante el año 2021") +
+  xlab("Mes") +
+  ylab("Cantidad de delitos") +
+  theme_minimal()
 
-
+ggplotly(grafico_delitos_mes)
+```
 
 ## Gráfico 3: Tipo de delito por género
 
@@ -131,7 +148,6 @@ grafico_delito_cantones <-
   theme_minimal()
 
 ggplotly(grafico_delito_cantones)
-
 ```
 
 
