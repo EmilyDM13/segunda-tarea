@@ -145,7 +145,7 @@ grafico_delito_cantones <-
            Canton == "CARTAGO" | Canton == "HEREDIA") %>%
   ggplot(aes(x = reorder(Canton, n), y = n)) +
   geom_bar(stat = "identity") +
-  ggtitle("Cantidad de Delitos en los Cantones de San José, Alajuela, Cartago y Heredia") +
+  ggtitle("Delitos en los Cantones de San José, Alajuela, Cartago y Heredia") +
   xlab("Cantón") +
   ylab("Cantidad") +
   coord_flip() +
