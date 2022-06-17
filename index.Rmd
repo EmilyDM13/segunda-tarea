@@ -49,7 +49,7 @@ estadisticas_policiales$Fecha <- as.Date(estadisticas_policiales$Fecha, format =
 
 ## Tabla
 
-```{r tabla-dt, echo= FALSE, message=FALSE}
+```{r tabla-dt, message=FALSE}
 estadisticas_policiales %>%
   dplyr::select(Delito,
                 Fecha,
@@ -78,7 +78,7 @@ estadisticas_policiales %>%
 
 ## Gráfico 1: Delitos por tipo de delito
 
-```{r grafico-tipo-delito, echo= FALSE, message=FALSE}
+```{r grafico-tipo-delito, message=FALSE}
 grafico_delitos <-
   estadisticas_policiales %>%
   count(Delito) %>%
@@ -95,15 +95,15 @@ ggplotly(grafico_delitos)
 
 ## Gráfico 2: Delitos por mes en el año
 
-```{r nueva-columna-mes, echo= FALSE, message=FALSE}
+```{r nueva-columna-mes, message=FALSE}
 d <-
 estadisticas_policiales %>%
 mutate(fecha_mes = lubridate::month(Fecha))
 
-o <-c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Ocutubre", "Noviembre")
+o <-c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre")
 ```
 
-```{r grafico-delitos-mes, echo= FALSE, message=FALSE}
+```{r grafico-delitos-mes, message=FALSE}
 grafico_delitos_mes <-
   d %>%
   count(fecha_mes) %>%
@@ -119,7 +119,7 @@ ggplotly(grafico_delitos_mes)
 
 ## Gráfico 3: Tipo de delito por género
 
-```{r grafico-delito-genero, echo= FALSE, message=FALSE}
+```{r grafico-delito-genero, message=FALSE}
 grafico_genero <-
   estadisticas_policiales %>%
   ggplot(aes(x = Delito, fill = Genero)) +
@@ -136,7 +136,7 @@ ggplotly(grafico_genero) %>% config(locale = 'es')
 
 ## Gráfico 4: Cantidad de delitos para los cantones de San José, Alajuela, Cartago y Heredia
 
-```{r grafico-delito-cantones, echo=FALSE, message=FALSE}
+```{r grafico-delito-cantones, message=FALSE}
 grafico_delito_cantones <-
   estadisticas_policiales %>%
   count(Canton) %>%
@@ -153,12 +153,3 @@ grafico_delito_cantones <-
 
 ggplotly(grafico_delito_cantones)
 ```
-
-
-
-
-
-
-
-
-
