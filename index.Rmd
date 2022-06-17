@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Información general
 
-Este documento presenta una tabla y varios gráficos estadísticos de los datos de estadísticas policiales en 2021 en Costa Rica publicados por el Organismo de Investigación Judicial en: [datos abiertos del Organismo de Investigación Judicial, OIJ]([https://sitiooij.poder-judicial.go.cr/](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos))
+Este documento presenta una tabla y varios gráficos estadísticos de los datos de estadísticas policiales en 2021 en Costa Rica publicados por el Organismo de Investigación Judicial en: [sitio web con los datos abiertos del Organismo de Investigación Judicial (OIJ)](https://sitiooij.poder-judicial.go.cr/index.php/ayuda/servicios-policiales/servicios-a-organizaciones/indice-de-transparencia-del-sector-publico-costarricense/datos-abiertos)
 
 ## Preparativos
 
