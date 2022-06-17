@@ -14,7 +14,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
 ## Información general
@@ -78,7 +78,7 @@ estadisticas_policiales %>%
 
 ## Gráfico 1: Delitos por tipo de delito
 
-```{r grafico-tipo-delito, message=FALSE}
+```{r grafico-tipo-delito, error=FALSE}
 grafico_delitos <-
   estadisticas_policiales %>%
   count(Delito) %>%
@@ -87,7 +87,7 @@ grafico_delitos <-
   ggtitle("Cantidad de delitos por tipo de delito") +
   xlab("Tipo de delito") +
   ylab("Cantidad") +
-  coord_flip()
+  coord_flip() +
   theme_minimal()
 
 ggplotly(grafico_delitos)
@@ -127,7 +127,7 @@ grafico_genero <-
   ggtitle("Tipo de delito por género") +
   xlab("Delito") +
   ylab("Proporción") +
-  labs(fill = "Delito") +
+  labs(fill = "Género") +
   coord_flip() +
   theme_minimal()
 
